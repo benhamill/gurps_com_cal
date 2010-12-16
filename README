@@ -1,0 +1,3 @@
+This is likely to be a total hack it's entire life. If you fork this and mess with it, well, have fun, but no guarantees.
+
+The idea is to get it working reasonably well from irb first, then go back and make it more user-friendly with some kind of CLI.
