@@ -1,0 +1,2 @@
+class GurpsComCal::Character
+end

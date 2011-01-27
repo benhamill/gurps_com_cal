@@ -1,0 +1,2 @@
+class GurpsComCal::GM
+end

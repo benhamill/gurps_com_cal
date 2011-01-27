@@ -1,3 +1,2 @@
-module GurpsComCal
-  # Your code goes here...
-end
+require 'gurps_com_cal/character'
+require 'gurps_com_cal/gm'
