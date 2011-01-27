@@ -21,7 +21,7 @@ module GurpsComCal
       end
 
       # Secondary Characteristics
-      attr_writer :thrust, :swing, :bl, :hp, :will, :per :fp, :basic_speed, :basic_move
+      attr_writer :thrust, :swing, :bl, :hp, :will, :per, :fp, :basic_speed, :basic_move, :dodge
 
       def thrust
         @thrust || DAMAGE_TABLE[st][:thr]
