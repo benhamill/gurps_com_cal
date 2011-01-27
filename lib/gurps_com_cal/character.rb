@@ -1,5 +1,5 @@
-require 'gurps_com_cal/character/attributes'
-require 'gurps_com_cal/character/yaml'
+require_relative 'character/attributes'
+require_relative 'character/yaml'
 
 module GurpsComCal
   class Character
