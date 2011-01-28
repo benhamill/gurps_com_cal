@@ -54,5 +54,25 @@ describe GurpsComCal::Roll do
 
       result.should == GurpsComCal::Roll.new(3, 3)
     end
+
+    it "should add a roll and an integer" do
+      result = GurpsComCal::Roll.new(1, 3) + 2
+
+      result.should == GurpsComCal::Roll.new(1, 5)
+    end
+  end
+
+  describe "subtraction" do
+    it "should subtract two rolls" do
+      result = GurpsComCal::Roll.new(2,3) - GurpsComCal::Roll.new(1, 1)
+
+      result.should == GurpsComCal::Roll.new(1,2)
+    end
+
+    it "should subtract an integer from a roll" do
+      result = GurpsComCal::Roll.new(2,3) - 2
+
+      result.should == GurpsComCal::Roll.new(2,1)
+    end
   end
 end
