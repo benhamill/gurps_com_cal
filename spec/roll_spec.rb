@@ -37,4 +37,22 @@ describe GurpsComCal::Roll do
       GurpsComCal::Roll.new(2).to_s.should == '2d'
     end
   end
+
+  describe "equality" do
+    it "should compare two rolls by value" do
+      GurpsComCal::Roll.new(1, 3).should == GurpsComCal::Roll.new(1, 3)
+    end
+
+    it "should fail out objects that don't behave like Rolls" do
+      GurpsComCal::Roll.new(1, 3).should_not == 3
+    end
+  end
+
+  describe "addition" do
+    it "should add two rolls together" do
+      result = GurpsComCal::Roll.new(1,3) + GurpsComCal::Roll.new(2)
+
+      result.should == GurpsComCal::Roll.new(3, 3)
+    end
+  end
 end
