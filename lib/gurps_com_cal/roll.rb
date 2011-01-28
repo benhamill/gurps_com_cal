@@ -31,7 +31,8 @@ module GurpsComCal
 
     def to_s
       sign = adds < 0 ? '' : '+'
-      "#{self.dice.to_s}d#{sign}#{self.adds.to_s}"
+      ending = adds == 0 ? '' : "#{sign}#{adds.to_s}"
+      "#{dice.to_s}d#{ending}"
     end
   end
 end
