@@ -1,3 +1,5 @@
+require 'yaml'
+
 module GurpsComCal
   class Character
     module Yaml
