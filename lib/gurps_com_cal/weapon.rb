@@ -37,6 +37,7 @@ module GurpsComCal
     def self.from_hash hash
       w = new hash['character'], hash['name'], hash['weight']
       attacks = hash['attacks'].collect { |attack_hash| Attack.from_hash({ 'weapon' => w }.merge(attack_hash)) }
+      w.attacks = attacks
       w
     end
   end
