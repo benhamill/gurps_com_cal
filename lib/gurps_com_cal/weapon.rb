@@ -27,6 +27,10 @@ module GurpsComCal
       end
     end
 
+    def attack attack_name
+      @attacks[attack_name]
+    end
+
     def to_hash
       result = {}
       result['attacks'] = @attacks.inject([]) do |array, hash_member|
