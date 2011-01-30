@@ -1,12 +1,14 @@
 require_relative 'character/attributes'
 require_relative 'character/yaml'
 require_relative 'character/weapons'
+require_relative 'character/skills'
 
 module GurpsComCal
   class Character
     include Attributes
     include Yaml
     include Weapons
+    include Skills
 
     def initialize options = {}
       options.each_key do |key|

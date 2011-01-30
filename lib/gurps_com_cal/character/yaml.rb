@@ -28,8 +28,11 @@ module GurpsComCal
 
             if stat_name == 'weapons'
               value = value.collect do |weapon_name, weapon|
-                puts weapon
                 weapon.to_hash
+              end
+            elsif stat_name == 'skills'
+              value = value.collect do |skill_name, skill|
+                skill.to_hash
               end
             end
 
