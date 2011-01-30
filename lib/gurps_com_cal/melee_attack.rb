@@ -8,5 +8,9 @@ module GurpsComCal
       @parry_modifier = parry_modifier
       @type = 'melee'
     end
+
+    def self.from_hash hash
+      new(hash['weapon'], hash['name'], hash['damage'], hash['skills'], hash['reach'], hash['parry_modifier'], hash['min_st'].to_i)
+    end
   end
 end

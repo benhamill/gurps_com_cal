@@ -25,7 +25,13 @@ module GurpsComCal
             stat_name = variable.to_s.downcase.gsub(/ +/, '_').gsub(/[^a-z_]/, '')
 
             value = instance_variable_get(variable)
-            value = value.to_hash if stat_name == 'weapons'
+
+            if stat_name == 'weapons'
+              value = value.collect do |weapon_name, weapon|
+                puts weapon
+                weapon.to_hash
+              end
+            end
 
             hash[stat_name] = value
             hash

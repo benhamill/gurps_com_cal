@@ -10,6 +10,15 @@ module GurpsComCal
       @weight = weight
     end
 
+    def inspect
+      instance_vars = instance_variables.collect do |var|
+        next if var == :@character
+        "#{var.to_s}=#{instance_variable_get(var).inspect}"
+      end.compact.join(' ')
+
+      "#<#{self.class} #{instance_vars}>"
+    end
+
     def attacks= attacks
       @attacks = {}
 
@@ -26,17 +35,26 @@ module GurpsComCal
       end
 
       instance_variables.inject(result) do |result, variable|
-        return result if variable == :@attacks
+        unless variable == :@character or variable == :@attacks
+          stat_name = variable.to_s.gsub('@', '')
+          result[stat_name] = instance_variable_get(variable)
+        end
 
-        stat_name = variable.to_s.gsub('@', '')
-        result[stat_name] = instance_variable_get(variable)
         result
       end
     end
 
     def self.from_hash hash
       w = new hash['character'], hash['name'], hash['weight']
-      attacks = hash['attacks'].collect { |attack_hash| Attack.from_hash({ 'weapon' => w }.merge(attack_hash)) }
+
+      attacks = hash['attacks'].collect do |attack_hash|
+        if attack_hash['type'] == 'melee'
+          MeleeAttack.from_hash({ 'weapon' => w }.merge(attack_hash))
+        else
+          Attack.from_hash({ 'weapon' => w }.merge(attack_hash))
+        end
+      end
+
       w.attacks = attacks
       w
     end

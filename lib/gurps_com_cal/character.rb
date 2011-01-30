@@ -14,6 +14,14 @@ module GurpsComCal
       end
     end
 
+    def inspect
+      instance_vars = instance_variables.collect do |var|
+        "#{var.to_s}=#{instance_variable_get(var).inspect}"
+      end.join(' ')
+
+      "#<#{self.class} #{instance_vars}>"
+    end
+
     attr_writer :name
 
     def name

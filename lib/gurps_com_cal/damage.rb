@@ -21,13 +21,30 @@ module GurpsComCal
       end
     end
 
+    def inspect
+      instance_vars = instance_variables.collect do |var|
+        next if var == :@attack
+        "#{var.to_s}=#{instance_variable_get(var).inspect}"
+      end.compact.join(' ')
+
+      "#<#{self.class} #{instance_vars}>"
+    end
+
     def roll
       return @roll if @roll
-      return Roll.new(@attack.character.send(@damage_base), @damage_mod)
+      return @attack.character.send(@damage_base) + @damage_mod
     end
 
     def to_s
-      "#{roll.to_s} #{@type}"
+      unless @roll
+        sign = @damage_mod < 0 ? '' : '+'
+        ending = @damage_mod == 0 ? '' : "#{sign}#{@damage_mod.to_s}"
+        r = "#{@damage_base}#{ending}"
+      else
+        r = @roll.to_s
+      end
+
+      "#{r} #{@type}"
     end
   end
 end
