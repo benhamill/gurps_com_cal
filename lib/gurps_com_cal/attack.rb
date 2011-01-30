@@ -23,5 +23,9 @@ module GurpsComCal
     def character
       @weapon.character
     end
+
+    def self.from_hash hash
+      new(hash['weapon'], hash['name'], hash['damage'], hash['skills'], hash['min_st'])
+    end
   end
 end
