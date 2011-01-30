@@ -16,18 +16,18 @@ module GurpsComCal
           file ||= "tmp/#{name.downcase}.yaml"
 
           File.open(file, 'w') do |f|
-            f.puts YAML.dump(character_hash)
+            f.puts YAML.dump(to_hash)
           end
         end
 
-        private
-
-        def character_hash
+        def to_hash
           instance_variables.inject({}) do |hash, variable|
             stat_name = variable.to_s.downcase.gsub(/ +/, '_').gsub(/[^a-z_]/, '')
 
-            hash[stat_name] = instance_variable_get variable
+            value = instance_variable_get(variable)
+            value = value.to_hash if stat_name == 'weapons'
 
+            hash[stat_name] = value
             hash
           end
         end
