@@ -24,14 +24,20 @@ describe GurpsComCal::Combatant do
       @character.stub(:hp) { 10 }
     end
 
-    it "should compare damage taken to @character's HP to report current HP" do
+    it "should compare injury to the character's HP to report current HP" do
       @combatant.damage(:cr, 1)
       @combatant.current_hp.should == 9
     end
 
-    it "should multiply damage based on type" do
+    it "should apply the wounding modifier to penetrating damage" do
       @combatant.damage(:imp, 2)
       @combatant.current_hp.should == 6
+    end
+
+    it "should track injury over sucessive calls" do
+      @combatant.damage(:cr, 3)
+      @combatant.damage(:cr, 2)
+      @combatant.current_hp.should == 5
     end
   end
 end
