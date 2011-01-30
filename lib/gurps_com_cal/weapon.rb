@@ -2,9 +2,10 @@ require_relative 'melee_attack'
 
 module GurpsComCal
   class Weapon
-    attr_reader :name, :attacks
+    attr_reader :character, :name, :attacks
 
-    def initialize name, attacks, weight=0
+    def initialize character, name, attacks, weight=0
+      @character = character
       @name = name
       @weight = weight
       @attacks = {}

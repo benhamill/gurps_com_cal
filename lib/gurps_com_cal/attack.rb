@@ -1,11 +1,13 @@
+require_relative 'damage'
+
 module GurpsComCal
   class Attack
-    attr_reader :name,  :damage, :damage_type, :skills, :min_st
+    attr_reader :name, :damage, :damage_type, :skills, :min_st
 
-    def initialize name, damage, damage_type, skills, min_st=0
+    def initialize weapon, name, damage, skills, min_st=0
+      @weapon = weapon
       @name = name
-      @damage = damage
-      @damage_type = damage_type
+      @damage = Damage.new self, damage
       @skills = [skills].flatten
       @min_st = min_st
     end
@@ -16,6 +18,10 @@ module GurpsComCal
         hash[stat_name] = instance_variable_get(variable)
         hash
       end
+    end
+
+    def character
+      @weapon.character
     end
   end
 end
