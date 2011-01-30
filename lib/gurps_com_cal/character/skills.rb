@@ -1,11 +1,15 @@
 module GurpsComCal
   class Character
     class Skill
+      attr_reader :name
+
       def initialize character, name, attribute, modifier=0
         @character = character
         @name = name
 
-        if attribute.to_s =~ /([a-z]+)((\+|-)\d+)/
+        attribute.upcase!
+
+        if attribute.to_s =~ /([A-Z]+)((\+|-)\d+)/
           attribute = $1
           modifier = $2
         end
@@ -30,12 +34,12 @@ module GurpsComCal
         {'name' => @name, 'level' => level}
       end
 
-      def from_hash hash
+      def self.from_hash hash
         new(hash['character'], hash['name'], hash['level'])
       end
 
       def level
-        @character.send(@attribute) + @modifier
+        @character.send(@attribute.downcase) + @modifier
       end
     end
 
