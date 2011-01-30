@@ -10,7 +10,7 @@ module GurpsComCal
       @attack = attack
       @type = type
 
-      if damage_roll.type_of? Roll
+      if damage_roll.kind_of? Roll
         @roll = damage_roll
       elsif damage_roll[0] =~ /\d/
         @roll = Roll.new(damage_roll)
