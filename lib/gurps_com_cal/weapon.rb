@@ -4,10 +4,13 @@ module GurpsComCal
   class Weapon
     attr_reader :character, :name, :attacks
 
-    def initialize character, name, attacks, weight=0
+    def initialize character, name, weight=0
       @character = character
       @name = name
       @weight = weight
+    end
+
+    def attacks= attacks
       @attacks = {}
 
       [attacks].flatten.each do |attack|
