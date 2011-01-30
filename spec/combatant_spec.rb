@@ -13,11 +13,8 @@ describe GurpsComCal::Combatant do
     end
 
     it "should NOT pass methods to the character that it won't resspond to" do
+      @character.stub(:respond_to?).with(:foo) { false }
       @character.should_not_receive :foo
-      @combatant.foo
-    end
-
-    it "should raise an exception when the related character doesn't have the method" do
       expect{@combatant.foo}.to raise_error(NoMethodError)
     end
   end
