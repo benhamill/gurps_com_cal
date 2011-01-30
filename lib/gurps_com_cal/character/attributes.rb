@@ -26,10 +26,12 @@ module GurpsComCal
       def thrust
         @thrust || DAMAGE_TABLE[st][:thr]
       end
+      def thr; thrust; end
 
       def swing
         @swing || DAMAGE_TABLE[st][:sw]
       end
+      def sw; swing; end
 
       def bl
         @bl || st * st / 5.0
