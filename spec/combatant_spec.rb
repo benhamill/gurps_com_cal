@@ -11,5 +11,10 @@ describe GurpsComCal::Combatant do
       @character.should_receive :st
       @combatant.st
     end
+
+    it "should raise an exception when the related character doesn't have the method" do
+      @character.stub(:foo) { raise NoMethodError }
+      expect{@combatant.foo}.to raise_error(NoMethodError)
+    end
   end
 end

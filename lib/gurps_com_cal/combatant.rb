@@ -5,7 +5,7 @@ module GurpsComCal
     end
 
     def method_missing method, *args, &block
-      @character.send(method, args)
+      @character.send(method, *args, &block)
     end
   end
 end
