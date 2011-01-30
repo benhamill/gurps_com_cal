@@ -12,6 +12,15 @@ module GurpsComCal
       end
     end
 
+    def damage type, basic_damage
+      @injury ||= 0
+      @injury += basic_damage
+    end
+
+    def current_hp
+      @character.hp - @injury
+    end
+
     private
 
     def pass_to_character? method
