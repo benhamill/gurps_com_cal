@@ -2,6 +2,7 @@ module GurpsComCal
   class Combatant
     def initialize character
       @character = character
+      @injury = 0
     end
 
     def method_missing method, *args, &block
@@ -13,7 +14,6 @@ module GurpsComCal
     end
 
     def damage type, basic_damage
-      @injury ||= 0
       injury = basic_damage * WOUNDING_MODS[type.to_s]
       @injury += injury
     end
