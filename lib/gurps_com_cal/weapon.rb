@@ -2,7 +2,7 @@ require_relative 'melee_attack'
 
 module GurpsComCal
   class Weapon
-    attr_reader :character, :name, :attacks
+    attr_reader :character, :name
 
     def initialize character, name, weight=0
       @character = character
@@ -25,6 +25,10 @@ module GurpsComCal
       [attacks].flatten.each do |attack|
         @attacks[attack.name] = attack
       end
+    end
+
+    def attacks
+      @attacks.keys
     end
 
     def attack attack_name
