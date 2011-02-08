@@ -1,4 +1,4 @@
-require_relative 'melee_attack'
+require_relative 'weapon/melee_attack'
 
 module GurpsComCal
   class Weapon
