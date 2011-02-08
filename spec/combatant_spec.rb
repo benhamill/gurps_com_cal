@@ -39,5 +39,10 @@ describe GurpsComCal::Combatant do
       @combatant.damage(:cr, 2)
       @combatant.current_hp.should == 5
     end
+
+    it "should NOT do fractions" do
+      @combatant.damage(:cut, 1)
+      @combatant.current_hp.should == 8
+    end
   end
 end
