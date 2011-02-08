@@ -91,5 +91,11 @@ describe GurpsComCal::Roll do
       GurpsComCal::Roll.should_receive(:rand).exactly(3).times.and_return(0)
       GurpsComCal::Roll.result.should == 3
     end
+
+    it "should proxy the class method on an instance" do
+      roll = GurpsComCal::Roll.new('2d-1')
+      GurpsComCal::Roll.should_receive(:result).with(roll).and_return(10)
+      roll.result.should == 10
+    end
   end
 end

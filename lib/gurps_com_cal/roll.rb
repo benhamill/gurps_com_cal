@@ -52,7 +52,7 @@ module GurpsComCal
     end
 
     def result
-      Roll.roll self
+      Roll.result self
     end
   end
 end
