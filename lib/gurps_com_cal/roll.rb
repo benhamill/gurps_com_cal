@@ -7,7 +7,8 @@ module GurpsComCal
         memo + rand(6) + 1
       end
 
-      r + roll.adds
+      r += roll.adds
+      [0,r].max
     end
 
     def initialize dice, adds = 0
