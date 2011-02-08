@@ -38,5 +38,11 @@ module GurpsComCal
     def character
       @weapon.character
     end
+
+    def skill
+      skills.collect do |skill|
+        character.skill(skill).level
+      end.max
+    end
   end
 end

@@ -12,5 +12,9 @@ module GurpsComCal
     def self.from_hash hash
       new(hash['weapon'], hash['name'], hash['damage'], hash['skills'], hash['reach'], hash['parry_modifier'], hash['min_st'].to_i)
     end
+
+    def parry
+      skill + @parry_modifier
+    end
   end
 end
