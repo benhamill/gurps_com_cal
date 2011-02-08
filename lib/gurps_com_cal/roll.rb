@@ -2,7 +2,9 @@ module GurpsComCal
   class Roll
     attr_accessor :dice, :adds
 
-    def self.result roll=Roll.new('3d')
+    def self.result roll='3d'
+      roll = Roll.new(roll) unless roll.respond_to? :dice
+
       r = Array.new(roll.dice).inject(0) do |memo, nothing|
         memo + rand(6) + 1
       end

@@ -105,7 +105,7 @@ describe GurpsComCal::Roll do
 
     it "should try to create a Roll object if the arg wansn't one" do
       roll = GurpsComCal::Roll.new('3d')
-      GurpsComCal::Roll.should_receive(:new).with('3d').and_return
+      GurpsComCal::Roll.should_receive(:new).with('3d').and_return(roll)
       GurpsComCal::Roll.result
     end
   end
