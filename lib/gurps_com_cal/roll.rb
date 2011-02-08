@@ -2,6 +2,14 @@ module GurpsComCal
   class Roll
     attr_accessor :dice, :adds
 
+    def self.result roll=Roll.new('3d')
+      r = Array.new(roll.dice).inject(0) do |memo, nothing|
+        memo + rand(6) + 1
+      end
+
+      r + roll.adds
+    end
+
     def initialize dice, adds = 0
       if dice.respond_to? :split
         d, a = dice.split('d')
@@ -41,6 +49,10 @@ module GurpsComCal
       sign = adds < 0 ? '' : '+'
       ending = adds == 0 ? '' : "#{sign}#{adds.to_s}"
       "#{dice.to_s}d#{ending}"
+    end
+
+    def result
+      Roll.roll self
     end
   end
 end

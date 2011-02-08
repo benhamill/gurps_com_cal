@@ -75,4 +75,21 @@ describe GurpsComCal::Roll do
       result.should == GurpsComCal::Roll.new(2,1)
     end
   end
+
+  describe "result" do
+    it "should roll a d6 for each dice in the roll" do
+      GurpsComCal::Roll.should_receive(:rand).with(6).exactly(5).times.and_return(0)
+      GurpsComCal::Roll.result(GurpsComCal::Roll.new("5d")).should == 5
+    end
+
+    it "should add anything in the adds to the result" do
+      GurpsComCal::Roll.should_receive(:rand).exactly(3).times.and_return(0)
+      GurpsComCal::Roll.result(GurpsComCal::Roll.new("3d+2")).should == 5
+    end
+
+    it "should default to rolling 3d" do
+      GurpsComCal::Roll.should_receive(:rand).exactly(3).times.and_return(0)
+      GurpsComCal::Roll.result.should == 3
+    end
+  end
 end
