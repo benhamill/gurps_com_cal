@@ -67,6 +67,26 @@ describe "GurpsComCal::Character::Yaml" do
           ]
         }
       end
+
+      it "should handle a special case for the instance variable 'skills'" do
+        skills = {:a => double, :b => double, :c => double}
+
+        subject.instance_variable_set '@foo', 'foo'
+        subject.instance_variable_set '@skills', skills
+
+        skills.each_with_index do |skill, i|
+          skill[1].should_receive(:to_hash) { { 'number' => i } }
+        end
+
+        subject.to_hash.should == {
+          'foo' => 'foo',
+          'skills' => [
+            { 'number' => 0 },
+            { 'number' => 1 },
+            { 'number' => 2 }
+          ]
+        }
+      end
     end
   end
 end
