@@ -97,5 +97,10 @@ describe GurpsComCal::Roll do
       GurpsComCal::Roll.should_receive(:result).with(roll).and_return(10)
       roll.result.should == 10
     end
+
+    it "should NOT return a < 0 result" do
+      GurpsComCal::Roll.should_receive(:rand).exactly(3).times.and_return(0)
+      GurpsComCal::Roll.result(GurpsComCal::Roll.new("3d-10")).should == 0
+    end
   end
 end
