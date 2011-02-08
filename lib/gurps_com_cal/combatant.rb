@@ -15,7 +15,7 @@ module GurpsComCal
 
     def damage type, basic_damage
       injury = basic_damage * WOUNDING_MODS[type.to_s]
-      @injury += injury
+      @injury += injury.ceil
     end
 
     def current_hp
