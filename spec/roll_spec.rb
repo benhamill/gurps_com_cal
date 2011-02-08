@@ -102,5 +102,11 @@ describe GurpsComCal::Roll do
       GurpsComCal::Roll.should_receive(:rand).exactly(3).times.and_return(0)
       GurpsComCal::Roll.result(GurpsComCal::Roll.new("3d-10")).should == 0
     end
+
+    it "should try to create a Roll object if the arg wansn't one" do
+      roll = GurpsComCal::Roll.new('3d')
+      GurpsComCal::Roll.should_receive(:new).with('3d').and_return
+      GurpsComCal::Roll.result
+    end
   end
 end
