@@ -4,7 +4,7 @@ module GurpsComCal
   class Character
     module Yaml
       module ClassMethods
-        def from_yaml file=nil
+        def load_yaml file=nil
           file ||= "tmp/goon.yaml"
 
           new YAML.load(File.read(file))
@@ -12,7 +12,7 @@ module GurpsComCal
       end
 
       module InstanceMethods
-        def to_yaml file=nil
+        def save_yaml file=nil
           file ||= "tmp/#{name.downcase}.yaml"
 
           File.open(file, 'w') do |f|

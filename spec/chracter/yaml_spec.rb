@@ -32,7 +32,7 @@ describe "GurpsComCal::Character::Yaml" do
 
     it "should parse a yaml file and hand it to new" do
       subject.should_receive(:new).with({'name' => 'Eris', 'epithets' => ['Discordia', 'Strife']})
-      subject.from_yaml(@file_location)
+      subject.load_yaml(@file_location)
     end
   end
 
@@ -86,6 +86,40 @@ describe "GurpsComCal::Character::Yaml" do
             { 'number' => 2 }
           ]
         }
+      end
+    end
+
+    describe "save_yaml" do
+      before(:each) do
+        @directory = "tmp/specs"
+        @file_location = "#{@directory}/test.yaml"
+
+        Dir.mkdir(@directory) unless Dir.exists?(@directory)
+        File.delete(@file_location) if File.exists?(@file_location)
+      end
+
+      after(:each) do
+        File.delete(@file_location) if File.exists?(@file_location)
+      end
+
+      it "should write to a given file" do
+        subject.should_receive(:to_hash).and_return({ 'foo' => 'bar', 'baz' => 'bom' })
+        subject.save_yaml(@file_location)
+
+        File.exists?(@file_location).should == true
+      end
+
+      it "should convert the object's hash to yaml" do
+        subject.should_receive(:to_hash) { { 'foo' => 'bar', 'baz' => 'bom' } }
+        subject.save_yaml(@file_location)
+
+        expected_yaml = <<-YAML
+--- 
+foo: bar
+baz: bom
+        YAML
+
+        File.read(@file_location).should == expected_yaml
       end
     end
   end
