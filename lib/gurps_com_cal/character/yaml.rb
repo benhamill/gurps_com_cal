@@ -22,7 +22,7 @@ module GurpsComCal
 
         def to_hash
           instance_variables.inject({}) do |hash, variable|
-            stat_name = variable.to_s.downcase.gsub(/ +/, '_').gsub(/[^a-z_]/, '')
+            stat_name = variable.to_s.downcase.gsub('@', '')
 
             value = instance_variable_get(variable)
 
