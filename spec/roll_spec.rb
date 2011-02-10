@@ -1,3 +1,4 @@
+require_relative 'spec_helper.rb'
 require 'gurps_com_cal/roll'
 
 describe GurpsComCal::Roll do
