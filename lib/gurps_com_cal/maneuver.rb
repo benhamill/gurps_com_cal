@@ -1,1 +1,1 @@
-require_relative 'action/attack'
+require_relative 'maneuver/attack'
