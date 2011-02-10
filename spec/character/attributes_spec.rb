@@ -152,5 +152,60 @@ describe "GurpsComCal::Character::Attributes" do
         end
       end
     end
+
+    context "movement" do
+      describe "basic speed" do
+        it "should default to HT + DX divided by 4" do
+          subject.ht = 12
+          subject.dx = 8
+          subject.basic_speed.should == 5.0
+        end
+
+        it "should compute fractions" do
+          subject.ht = 12
+          subject.dx = 9
+          subject.basic_speed.should == 5.25
+        end
+
+        it "should retain a value independant of HT and DX when set" do
+          subject.basic_speed = 6.25
+          subject.dx = 2
+          subject.ht = 6
+          subject.basic_speed.should == 6.25
+        end
+      end
+
+      describe "basic move" do
+        it "should default to basic speed without fractions" do
+          subject.basic_speed = 5.0
+          subject.basic_move.should == 5
+
+          subject.basic_speed = 6.25
+          subject.basic_move.should == 6
+        end
+
+        it "should retain a value independant of basic speed when set" do
+          subject.basic_move = 3
+          subject.basic_speed = 8.75
+          subject.basic_move.should == 3
+        end
+      end
+
+      describe "dodge" do
+        it "should default to basic speed plus three without fractions" do
+          subject.basic_speed = 5.0
+          subject.dodge.should == 8
+
+          subject.basic_speed = 6.5
+          subject.dodge.should == 9
+        end
+
+        it "should retain a value independant of basic speed when set" do
+          subject.dodge = 10
+          subject.basic_speed = 5.0
+          subject.dodge.should == 10
+        end
+      end
+    end
   end
 end
