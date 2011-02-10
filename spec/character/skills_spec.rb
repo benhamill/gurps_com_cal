@@ -25,7 +25,7 @@ describe "GurpsComCal::Character::Skills" do
   end
 
   it "should return a list of skill names" do
-    subject.skills.should == %w{Fightin' Spittin' Shootin'}
+    subject.skills.sort.should == %w{Fightin' Spittin' Shootin'}.sort
   end
 
   it "should retrieve a skill by name" do
