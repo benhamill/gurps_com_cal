@@ -1,5 +1,4 @@
-require_relative 'spec_helper.rb'
-require 'gurps_com_cal/roll'
+require_relative 'spec_helper'
 
 describe GurpsComCal::Roll do
   describe "initialize" do

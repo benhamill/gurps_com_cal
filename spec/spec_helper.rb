@@ -6,3 +6,5 @@ SimpleCov.start do
 
   add_group 'teh libz', '/lib/'
 end
+
+require 'gurps_com_cal'

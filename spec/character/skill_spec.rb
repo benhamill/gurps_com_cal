@@ -1,5 +1,4 @@
-require_relative '../spec_helper.rb'
-require 'gurps_com_cal/character/skill'
+require_relative '../spec_helper'
 
 describe GurpsComCal::Character::Skill do
   context "class methods" do

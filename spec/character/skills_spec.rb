@@ -1,5 +1,4 @@
-require_relative '../spec_helper.rb'
-require 'gurps_com_cal/character/skills'
+require_relative '../spec_helper'
 
 class SkillsHolder
   include GurpsComCal::Character::Skills

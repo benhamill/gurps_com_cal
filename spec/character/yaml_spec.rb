@@ -1,5 +1,4 @@
-require_relative '../spec_helper.rb'
-require 'gurps_com_cal/character/yaml'
+require_relative '../spec_helper'
 
 class CharacterYamlHolder
   include GurpsComCal::Character::Yaml

@@ -1,5 +1,4 @@
-require_relative 'spec_helper.rb'
-require 'gurps_com_cal/combatant'
+require_relative 'spec_helper'
 
 describe GurpsComCal::Combatant do
   before(:each) do
