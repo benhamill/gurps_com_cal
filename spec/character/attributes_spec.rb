@@ -70,5 +70,87 @@ describe "GurpsComCal::Character::Attributes" do
         end
       end
     end
+
+    context "secondary attributes" do
+      describe "basic lift" do
+        it "should default to ST squared divided by five" do
+          subject.st = 10
+          subject.bl.should == 20
+
+          subject.st = 12
+          subject.bl.should == 28.8
+        end
+
+        it "should retain a value independant of ST when set" do
+          subject.bl = 1
+          subject.st = 12
+          subject.bl.should == 1
+        end
+      end
+
+      describe "hit points" do
+        it "should default to ST" do
+          subject.st = 11
+          subject.hp.should == 11
+
+          subject.st = 400
+          subject.hp.should == 400
+        end
+
+        it "should retain a value different from ST when set" do
+          subject.hp = 10
+          subject.st = 11
+          subject.hp.should == 10
+        end
+      end
+
+      describe "will" do
+        it "should default to IQ" do
+          subject.iq = 9
+          subject.will.should == 9
+
+          subject.iq = 14
+          subject.will.should == 14
+        end
+
+        it "should retain a value different from IQ when set" do
+          subject.will = 9
+          subject.iq = 14
+          subject.will.should == 9
+        end
+      end
+
+      describe "perception" do
+        it "should default to IQ" do
+          subject.iq = 9
+          subject.per.should == 9
+
+          subject.iq = 14
+          subject.per.should == 14
+        end
+
+        it "should retain a value different from IQ when set" do
+          subject.per = 9
+          subject.iq = 14
+          subject.per.should == 9
+        end
+      end
+
+      describe "fatigue points" do
+        it "should default to HT" do
+          subject.ht = 10
+          subject.fp.should == 10
+
+          subject.ht = 8
+          subject.fp.should == 8
+        end
+
+        it "should retain a value different from HT when set" do
+          subject.fp = 10
+          subject.ht = 8
+          subject.fp.should == 10
+        end
+      end
+    end
   end
 end
