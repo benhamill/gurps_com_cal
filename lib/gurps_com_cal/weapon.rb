@@ -55,15 +55,16 @@ module GurpsComCal
     def self.from_hash hash
       w = new hash['character'], hash['name'], hash['weight']
 
-      attacks = hash['attacks'].collect do |attack_hash|
-        if attack_hash['type'] == 'melee'
-          MeleeAttack.from_hash({ 'weapon' => w }.merge(attack_hash))
-        else
-          Attack.from_hash({ 'weapon' => w }.merge(attack_hash))
-        end
+      if hash['attacks']
+        attacks = hash['attacks'].collect do |attack_hash|
+          if attack_hash['type'] == 'melee'
+            MeleeAttack.from_hash({ 'weapon' => w }.merge(attack_hash))
+          end
+        end.compact
+
+        w.attacks = attacks
       end
 
-      w.attacks = attacks
       w
     end
   end
