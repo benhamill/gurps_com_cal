@@ -15,10 +15,6 @@ describe "GurpsComCal::Character::Base" do
     it "should give the default name, 'Goon'" do
       subject.name.should == 'Goon'
     end
-
-    it "should inspect with some kind of string" do
-      subject.inspect.should be_a(String)
-    end
   end
 
   context "with args at creation" do
@@ -26,6 +22,10 @@ describe "GurpsComCal::Character::Base" do
 
     it "should store relevant options" do
       subject.name.should == 'Rick Castle'
+    end
+
+    it "should inspect with some kind of string" do
+      subject.inspect.should be_a(String)
     end
   end
 end
