@@ -3,7 +3,7 @@ require_relative 'damage'
 module GurpsComCal
   class Weapon
     class Attack
-      attr_reader :name, :damage, :damage_type, :skills, :min_st
+      attr_reader :name, :damage, :skills, :min_st
 
       def initialize weapon, name, damage, skills, min_st=0
         @weapon = weapon
