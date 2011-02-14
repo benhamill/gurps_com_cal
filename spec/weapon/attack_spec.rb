@@ -94,7 +94,7 @@ describe "GurpsComCal::Weapon::Attack" do
     describe "#skill" do
       context "with a character with only one applicable skill" do
         before(:each) do
-          @character = double
+          @character = double(:skills => ['Pyromania'])
           @character.stub(:skill).with('Pyromania') { double(:level => 10) }
           @character.stub(:skill).with('Fireworks') { nil }
           @weapon.stub(:character) { @character }
@@ -107,7 +107,7 @@ describe "GurpsComCal::Weapon::Attack" do
 
       context "with a character with more than one applicable skill" do
         before(:each) do
-          @character = double
+          @character = double(:skills => ['Pyromania', 'Fireworks'])
           @character.stub(:skill).with('Pyromania') { double(:level => 10) }
           @character.stub(:skill).with('Fireworks') { double(:level => 12) }
           @weapon.stub(:character) { @character }
