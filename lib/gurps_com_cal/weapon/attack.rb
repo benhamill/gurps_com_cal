@@ -42,7 +42,7 @@ module GurpsComCal
 
       def skill
         skills.collect do |skill|
-          character.skill(skill).level
+          character.skill(skill).try :level
         end.max
       end
     end
