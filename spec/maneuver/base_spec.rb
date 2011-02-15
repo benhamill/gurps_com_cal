@@ -30,5 +30,11 @@ describe "GurpsComCal::Maneuver::Base" do
       subject.should_receive(:foo).with('bar')
       subject.next('bar')
     end
+
+    it "should pass more than one argument received to the called method" do
+      subject.instance_variable_set('@next_method', :foo)
+      subject.should_receive(:foo).with('bar', 'baz', 'bom')
+      subject.next('bar', 'baz', 'bom')
+    end
   end
 end
