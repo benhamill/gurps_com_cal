@@ -1,4 +1,15 @@
 require_relative '../spec_helper'
 
 describe "GurpsComCal::Maneuver::Base" do
+  subject { GurpsComCal::Maneuver::Base.new @character }
+
+  before(:each) do
+    @character= double
+  end
+
+  describe "initialization" do
+    it "should take an actor" do
+      subject.actor.should == @character
+    end
+  end
 end
