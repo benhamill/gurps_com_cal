@@ -8,8 +8,8 @@ module GurpsComCal
         @next_method = :start
       end
 
-      def next
-        send(@next_method)
+      def next *args
+        send(@next_method, *args)
       end
     end
   end

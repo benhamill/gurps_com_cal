@@ -25,7 +25,7 @@ describe "GurpsComCal::Maneuver::Base" do
       subject.next
     end
 
-    it "should take in arguments and pass them along to the called method" do
+    it "should take in an argument and pass them along to the called method" do
       subject.instance_variable_set('@next_method', :foo)
       subject.should_receive(:foo).with('bar')
       subject.next('bar')
