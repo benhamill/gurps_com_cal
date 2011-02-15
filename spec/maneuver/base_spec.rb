@@ -18,5 +18,11 @@ describe "GurpsComCal::Maneuver::Base" do
       subject.should_receive(:start)
       subject.next
     end
+
+    it "should call the next-set method" do
+      subject.instance_variable_set('@next_method', :foo)
+      subject.should_receive(:foo)
+      subject.next
+    end
   end
 end
