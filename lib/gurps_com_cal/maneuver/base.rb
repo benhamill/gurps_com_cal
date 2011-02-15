@@ -6,6 +6,10 @@ module GurpsComCal
       def initialize actor
         @actor = actor
       end
+
+      def next
+        start
+      end
     end
   end
 end
