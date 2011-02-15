@@ -5,10 +5,11 @@ module GurpsComCal
 
       def initialize actor
         @actor = actor
+        @next_method = :start
       end
 
       def next
-        start
+        send(@next_method)
       end
     end
   end
