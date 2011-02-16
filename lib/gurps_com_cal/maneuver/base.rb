@@ -1,7 +1,7 @@
 module GurpsComCal
   module Maneuver
     class Base
-      attr_accessor :actor
+      attr_accessor :actor, :message, :options
 
       def initialize actor
         @actor = actor
