@@ -38,12 +38,14 @@ describe "GurpsComCal::Maneuver::Base" do
     end
   end
 
-  describe "accessors" do
+  describe "#message" do
     it "should return a message" do
       subject.instance_variable_set('@message', "Hello.")
       subject.message.should == 'Hello.'
     end
+  end
 
+  describe "#options" do
     it "should return options" do
       subject.instance_variable_set('@options', %w{yes no maybe})
       subject.options.should == %w{yes no maybe}
