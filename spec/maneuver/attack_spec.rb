@@ -72,4 +72,15 @@ describe "GurpsComCal::Maneuver::Attack" do
     subject.message.should == "Rick Castle, select a target."
     subject.options.should == nil
   end
+
+  context "after selecting a target" do
+    before(:each) do
+      subject.next.next(@thug)
+    end
+
+    it "should ask for a weapon to use" do
+      subject.message.should == "Rick Castle, select a weapon."
+      subject.options.sort.should == ['Fist', 'Large Knife'].sort
+    end
+  end
 end
