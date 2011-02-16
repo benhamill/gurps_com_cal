@@ -83,4 +83,57 @@ describe "GurpsComCal::Maneuver::Attack" do
       subject.options.sort.should == ['Fist', 'Large Knife'].sort
     end
   end
+
+  context "after selecting a weapon" do
+    before(:each) do
+      subject.next.next(@thug).next('Fist')
+    end
+
+    it "should ask which attack to use" do
+      subject.message.should == 'Rick Castle, select an attack.'
+      subject.options.should == ['Punch']
+    end
+  end
+
+  context "after selecting an attack" do
+    before(:each) do
+      subject.next.next(@thug).next('Fist').next('Punch')
+    end
+
+    it "should ask for the result of an attack roll" do
+      subject.message.should == 'Rick Castle, roll against 11 and enter the result.'
+      subject.options.should == nil
+    end
+  end
+
+  context "after failing the attack roll" do
+    before(:each) do
+      subject.next.next(@thug).next('Fist').next('Punch').next(15)
+    end
+
+    it "should end the maneuver" do
+      pending "How do we signal the end of a maneuver?"
+    end
+  end
+
+  context "after making the attack roll" do
+    before(:each) do
+      subject.next.next(@thug).next('Fist').next('Punch').next(9)
+    end
+
+    context "when the defender can defend" do
+      it "should ask the defender to select a defense" do
+        subject.message.should == 'Thug, select a defense.'
+        subject.options.sort.should == ['Parry', 'Dodge'].sort
+      end
+    end
+
+    context "when the defender can't defend" do
+      pending "Needs more design thought."
+    end
+  end
+
+  context "after the defender chooses a defense" do
+    pending "Oh man, do I need to think about defense machinery."
+  end
 end
