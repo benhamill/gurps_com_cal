@@ -2,6 +2,17 @@ module GurpsComCal
   module Maneuver
     class Attack < Base
       def start
+        select_target
+      end
+
+      private
+
+      def select_target
+        @next = :select_weapon
+        @message = "#{@actor.name}, select a target."
+      end
+
+      def select_weapon
         @next = :select_weapon
         ["#{@actor.name}, select a weapon.", @actor.weapons]
       end
