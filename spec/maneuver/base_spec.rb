@@ -39,16 +39,36 @@ describe "GurpsComCal::Maneuver::Base" do
   end
 
   describe "#message" do
-    it "should return a message" do
+    before(:each) do
       subject.instance_variable_set('@message', "Hello.")
+    end
+
+    it "should return a message" do
       subject.message.should == 'Hello.'
+    end
+
+    it "should not retain the message between steps" do
+      subject.stub(:foo)
+      subject.instance_variable_set('@next_method', :foo)
+      subject.next
+      subject.message.should == nil
     end
   end
 
   describe "#options" do
-    it "should return options" do
+    before(:each) do
       subject.instance_variable_set('@options', %w{yes no maybe})
+    end
+
+    it "should return options" do
       subject.options.should == %w{yes no maybe}
+    end
+
+    it "should not retain the options between steps" do
+      subject.stub(:foo)
+      subject.instance_variable_set('@next_method', :foo)
+      subject.next
+      subject.options.should == nil
     end
   end
 end
