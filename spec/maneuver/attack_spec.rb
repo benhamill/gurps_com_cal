@@ -1,8 +1,6 @@
 require_relative '../spec_helper'
 
 describe "GurpsComCal::Maneuver::Attack" do
-  subject { GurpsComCal::Maneuver::Attack.new @character }
-
   before(:all) do
     file = File.join(SPEC_WORKING_DIR, 'rick_castle.yaml')
     File.delete(file) if File.exists?(file)
@@ -60,11 +58,17 @@ describe "GurpsComCal::Maneuver::Attack" do
       YAML
     end
 
-    @character = GurpsComCal::Character.load_yaml file
+    @attacker = GurpsComCal::Character.load_yaml file
+    @thug = GurpsComCal::Character.load_yaml file
+    @thug.st = 12
+    @thug.iq = 9
+    @thug.dx = 10
   end
 
+  subject { GurpsComCal::Maneuver::Attack.new @attacker }
+
   it "should start off with asking for a target" do
-    subject.next.should be_true
+    subject.next
     subject.message.should == "Rick Castle, select a target."
     subject.options.should == nil
   end
