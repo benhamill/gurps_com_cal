@@ -8,3 +8,20 @@ SimpleCov.start do
 end
 
 require 'gurps_com_cal'
+
+SPEC_WORKING_DIR = "spec/work"
+
+RSpec.configure do |config|
+  config.before(:suite) do
+    Dir.mkdir(SPEC_WORKING_DIR) unless Dir.exists?(SPEC_WORKING_DIR)
+  end
+
+  config.after(:suite) do
+    Dir.new(SPEC_WORKING_DIR).each do |file|
+      next if file == '.' or file == '..'
+      File.delete("#{SPEC_WORKING_DIR}/#{file}")
+    end
+
+    Dir.delete(SPEC_WORKING_DIR)
+  end
+end
