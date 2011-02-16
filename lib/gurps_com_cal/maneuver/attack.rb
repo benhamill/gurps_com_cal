@@ -1,13 +1,9 @@
 module GurpsComCal
   module Maneuver
-    class Attack << Base
-      def initialize actor, target
-        @actor = actor
-        @target = target
-      end
-
+    class Attack < Base
       def start
-        [:select_weapon, "#{@actor.name}, select a weapon.", @actor.weapons]
+        @next = :select_weapon
+        ["#{@actor.name}, select a weapon.", @actor.weapons]
       end
 
       def select_weapon name
