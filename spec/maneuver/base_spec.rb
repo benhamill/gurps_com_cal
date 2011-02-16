@@ -36,6 +36,11 @@ describe "GurpsComCal::Maneuver::Base" do
       subject.should_receive(:foo).with('bar', 'baz', 'bom')
       subject.next('bar', 'baz', 'bom')
     end
+
+    it "should return the same object" do
+      subject.stub(:start)
+      subject.next().should == subject
+    end
   end
 
   describe "#message" do
