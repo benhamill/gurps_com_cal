@@ -9,6 +9,7 @@ module GurpsComCal
       end
 
       def next *args
+        @message, @options = nil, nil
         send(@next_method, *args)
       end
     end
