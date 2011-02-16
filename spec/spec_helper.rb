@@ -9,7 +9,7 @@ end
 
 require 'gurps_com_cal'
 
-SPEC_WORKING_DIR = "spec/work"
+SPEC_WORKING_DIR = File.join(File.expand_path('..', __FILE__), 'work')
 
 RSpec.configure do |config|
   config.before(:suite) do
