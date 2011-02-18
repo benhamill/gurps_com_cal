@@ -32,7 +32,7 @@ module GurpsComCal
         if result <= @attack.skill
           [:select_defense, "Success! #{@target.name}, select a defense.", %w(parry dodge)]
         else
-          false
+          @message = 'A miss! Maneuver ended.'
         end
       end
 
