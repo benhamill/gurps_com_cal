@@ -79,7 +79,10 @@ describe "GurpsComCal::Maneuver::Attack" do
     it "should delegate control to a defence" do
       GurpsComCal::Maneuver::Defense.should_receive(:new) { @defense }
       @defense.should_receive(:next)
-      subject.message.should == 'message from defense'
+    end
+
+    it "should append the defense's message to its own" do
+      subject.message.should == 'Success! message from defense'
       subject.options.should == 'options from defense'
     end
   end
