@@ -15,14 +15,11 @@ module GurpsComCal
         @options = @actor.weapons
       end
 
-      def select_weapon
-        @next_method = :select_weapon
-        ["#{@actor.name}, select a weapon.", @actor.weapons]
-      end
-
       def select_weapon name
         @weapon = @actor.weapon(name)
-        [:select_attack, "#{@actor.name}, select an attack.", @weapon.attacks]
+        @next_method = :select_attack
+        @message = "#{@actor.name}, select an attack."
+        @options = @weapon.attacks
       end
 
       def select_attack name
