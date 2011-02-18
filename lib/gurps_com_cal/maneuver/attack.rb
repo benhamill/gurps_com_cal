@@ -47,6 +47,15 @@ module GurpsComCal
         if @defense.continue?
           @next_method = :delegate_to_defense
         else
+          finish_defense
+        end
+      end
+
+      def finish_defense
+        if @defense.success?
+          @message = "#{@message} Maneuver ended."
+          @state = -1
+        else
           @next_method = :do_damage
         end
       end
