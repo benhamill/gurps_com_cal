@@ -24,7 +24,8 @@ module GurpsComCal
 
       def select_attack name
         @attack = @weapon.attack(name)
-        [:do_attack, "#{@actor.name} roll against #{@attack.skill} and enter the result.", nil]
+        @next_method = :do_attack
+        @message = "#{@actor.name}, roll against #{@attack.skill} and enter the result."
       end
 
       def do_attack result
