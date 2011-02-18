@@ -82,4 +82,70 @@ describe "GurpsComCal::Maneuver::Base" do
       subject.done.should be_false
     end
   end
+
+  describe "#continue?" do
+    context "when the state is 0" do
+      before(:each) do
+        subject.instance_variable_set('@state', 0)
+      end
+
+      it "should return true" do
+        subject.continue?.should be_true
+      end
+    end
+
+    context "when the state is NOT 0" do
+      before(:each) do
+        subject.instance_variable_set('@state', 1)
+      end
+
+      it "should return false" do
+        subject.continue?.should be_false
+      end
+    end
+  end
+
+  describe "#success?" do
+    context "when the state is 1" do
+      before(:each) do
+        subject.instance_variable_set('@state', 1)
+      end
+
+      it "should return true" do
+        subject.success?.should be_true
+      end
+    end
+
+    context "when the state is NOT 1" do
+      before(:each) do
+        subject.instance_variable_set('@state', -1)
+      end
+
+      it "should return false" do
+        subject.success?.should be_false
+      end
+    end
+  end
+
+  describe "#fail?" do
+    context "when the state is -1" do
+      before(:each) do
+        subject.instance_variable_set('@state', -1)
+      end
+
+      it "should return true" do
+        subject.fail?.should be_true
+      end
+    end
+
+    context "when the state is NOT -1" do
+      before(:each) do
+        subject.instance_variable_set('@state', 1)
+      end
+
+      it "should return false" do
+        subject.fail?.should be_false
+      end
+    end
+  end
 end
