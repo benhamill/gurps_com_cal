@@ -11,6 +11,10 @@ describe "GurpsComCal::Maneuver::Base" do
     it "should take an actor" do
       subject.actor.should == @character
     end
+
+    it "should set the state to continue" do
+      subject.continue?.should be_true
+    end
   end
 
   describe "#next" do
