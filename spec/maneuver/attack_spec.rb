@@ -72,16 +72,14 @@ describe "GurpsComCal::Maneuver::Attack" do
   end
 
   context "when making the attack roll" do
-    after(:each) do
-      subject.next.next(@thug).next('Fist').next('Punch').next(9)
-    end
-
     it "should delegate control to a defence" do
       GurpsComCal::Maneuver::Defense.should_receive(:new) { @defense }
       @defense.should_receive(:next)
+      subject.next.next(@thug).next('Fist').next('Punch').next(9)
     end
 
     it "should append the defense's message to its own" do
+      subject.next.next(@thug).next('Fist').next('Punch').next(9)
       subject.message.should == 'Success! message from defense'
       subject.options.should == 'options from defense'
     end
