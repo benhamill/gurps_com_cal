@@ -11,7 +11,11 @@ module GurpsComCal
 
       def next *args
         @message, @options = nil, nil
-        send(@next_method, *args)
+
+        if continue?
+          send(@next_method, *args)
+        end
+
         self
       end
 
