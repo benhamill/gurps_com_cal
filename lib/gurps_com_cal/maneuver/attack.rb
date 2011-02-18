@@ -33,6 +33,7 @@ module GurpsComCal
           [:select_defense, "Success! #{@target.name}, select a defense.", %w(parry dodge)]
         else
           @message = 'A miss! Maneuver ended.'
+          @state = -1
         end
       end
 
