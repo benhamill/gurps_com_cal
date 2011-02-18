@@ -108,12 +108,11 @@ describe "GurpsComCal::Maneuver::Attack" do
   end
 
   context "after failing the attack roll" do
-    before(:each) do
-      subject.next.next(@thug).next('Fist').next('Punch').next(15)
-    end
-
     it "should end the maneuver" do
-      pending "How do we signal the end of a maneuver?"
+      subject.next.next(@thug).next('Fist').next('Punch').next(15).should be_false
+      subject.message.should == 'A miss! Maneuver ended.'
+      subject.options.should == nil
+      subject.next.should be_false
     end
   end
 
