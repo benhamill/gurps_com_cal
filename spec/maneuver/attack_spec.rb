@@ -2,10 +2,10 @@ require_relative '../spec_helper'
 
 describe "GurpsComCal::Maneuver::Attack" do
   before(:all) do
-    file = File.join(SPEC_WORKING_DIR, 'rick_castle.yaml')
-    File.delete(file) if File.exists?(file)
+    @file = File.join(SPEC_WORKING_DIR, 'rick_castle.yaml')
+    File.delete(@file) if File.exists?(@file)
 
-    File.open(file, 'w') do |f|
+    File.open(@file, 'w') do |f|
       f.puts <<-YAML
         ---
         name: Rick Castle
@@ -57,9 +57,11 @@ describe "GurpsComCal::Maneuver::Attack" do
                 parry_modifier: -1
       YAML
     end
+  end
 
-    @attacker = GurpsComCal::Character.load_yaml file
-    @thug = GurpsComCal::Character.load_yaml file
+  before(:each) do
+    @attacker = GurpsComCal::Character.load_yaml @file
+    @thug = GurpsComCal::Character.load_yaml @file
     @thug.name = 'Thug'
     @thug.st = 12
     @thug.iq = 9
