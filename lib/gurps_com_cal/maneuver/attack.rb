@@ -31,12 +31,23 @@ module GurpsComCal
       def do_attack result
         if result <= @attack.skill
           @defense = Defense.new(@target)
-          @defense.next
-          @message = "Success! #{@defense.message}"
-          @options = @defense.options
+          @message = 'Success!'
+          delegate_to_defense
         else
           @message = 'A miss! Maneuver ended.'
           @state = -1
+        end
+      end
+
+      def delegate_to_defense *args
+        @defense.next(*args)
+        @message = @message ? "#{@message} #{@defense.message}" : @defense.message
+        @options = @defense.options
+
+        if @defense.continue?
+          @next_method = :delegate_to_defense
+        else
+          @next_method = :do_damage
         end
       end
 
