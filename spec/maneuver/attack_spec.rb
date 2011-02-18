@@ -60,6 +60,7 @@ describe "GurpsComCal::Maneuver::Attack" do
 
     @attacker = GurpsComCal::Character.load_yaml file
     @thug = GurpsComCal::Character.load_yaml file
+    @thug.name = 'Thug'
     @thug.st = 12
     @thug.iq = 9
     @thug.dx = 10
