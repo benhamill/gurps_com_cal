@@ -73,7 +73,7 @@ describe "GurpsComCal::Maneuver::Attack" do
 
   context "when making the attack roll" do
     it "should delegate control to a defence" do
-      GurpsComCal::Maneuver::Defense.should_receive(:new) { @defense }
+      GurpsComCal::Maneuver::Defense.should_receive(:new).with(@thug) { @defense }
       @defense.should_receive(:next)
       subject.next.next(@thug).next('Fist').next('Punch').next(9)
     end
@@ -108,7 +108,8 @@ describe "GurpsComCal::Maneuver::Attack" do
     before(:each) do
       @defense.stub(:fail?) { false }
       @defense.stub(:success?) { true }
-      subject.next.next(@thug).next('Fist').next('Punch').next(9)
+      @defense.stub(:continue?).and_return(true, false)
+      subject.next.next(@thug).next('Fist').next('Punch').next(9).next
     end
 
     it "should stop delegating" do
@@ -116,8 +117,8 @@ describe "GurpsComCal::Maneuver::Attack" do
       subject.next
     end
 
-    it "should tell have the message and options form the defense" do
-      subject.message.should == 'message from defense'
+    it "should have the message and options form the defense" do
+      subject.message.should == 'message from defense Maneuver ended.'
       subject.options.should == 'options from defense'
     end
 
