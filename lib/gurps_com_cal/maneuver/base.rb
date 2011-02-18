@@ -13,6 +13,10 @@ module GurpsComCal
         send(@next_method, *args)
         self
       end
+
+      def done
+        false
+      end
     end
   end
 end

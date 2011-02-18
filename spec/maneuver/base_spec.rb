@@ -76,4 +76,10 @@ describe "GurpsComCal::Maneuver::Base" do
       subject.options.should == nil
     end
   end
+
+  describe "#done" do
+    it "should return false" do
+      subject.done.should be_false
+    end
+  end
 end
