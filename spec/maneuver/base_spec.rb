@@ -45,6 +45,13 @@ describe "GurpsComCal::Maneuver::Base" do
       subject.stub(:start)
       subject.next().should == subject
     end
+
+    it "should not call the next method if the maneuver is done" do
+      subject.instance_variable_set('@next_method', :foo)
+      subject.instance_variable_set('@state', 1)
+      subject.should_not_receive(:foo)
+      subject.next
+    end
   end
 
   describe "#message" do
