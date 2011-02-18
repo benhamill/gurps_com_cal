@@ -1,0 +1,48 @@
+---
+name: Thug Castle
+st: 12
+iq: 9
+ht: 11
+skills:
+  - name: Brawling
+    level: DX
+  - name: Knife
+    level: DX+1
+weapons:
+  - name: Fist
+    weight: 0
+    attacks:
+      - name: Punch
+        type: melee
+        damage: thr-1 cr
+        skills:
+          - Boxing
+          - Brawling
+          - Karate
+          - DX
+        reach:
+          - C
+        min_st: 0
+        parry_modifier: 0
+  - name: Large Knife
+    weight: 1
+    attacks:
+      - name: Swing
+        type: melee
+        damage: sw-2 cut
+        skills:
+          - Knife
+        reach:
+          - C
+          - 1
+        min_st: 6
+        parry_modifier: -1
+      - name: Thrust
+        type: melee
+        damage: thr imp
+        skills:
+          - Knife
+        reach:
+          - C
+        min_st: 6
+        parry_modifier: -1
