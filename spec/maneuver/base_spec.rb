@@ -88,12 +88,6 @@ describe "GurpsComCal::Maneuver::Base" do
     end
   end
 
-  describe "#done" do
-    it "should return false" do
-      subject.done.should be_false
-    end
-  end
-
   describe "#continue?" do
     context "when the state is 0" do
       before(:each) do

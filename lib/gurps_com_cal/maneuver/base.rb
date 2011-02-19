@@ -19,10 +19,6 @@ module GurpsComCal
         self
       end
 
-      def done
-        false
-      end
-
       def continue?
         @state == 0
       end
