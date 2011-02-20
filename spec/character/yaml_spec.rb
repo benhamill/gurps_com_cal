@@ -8,7 +8,7 @@ describe "GurpsComCal::Character::Yaml" do
   context "class methods" do
     subject { CharacterYamlHolder }
 
-    before(:each) do
+    before(:all) do
       yaml = <<-YAML
         ---
         name: Eris
@@ -17,17 +17,11 @@ describe "GurpsComCal::Character::Yaml" do
           - Strife
       YAML
 
-      @directory = "tmp/specs"
-      @file_location = "#{@directory}/test.yaml"
+      @file_location = "#{SPEC_WORKING_DIR}/eris.yaml"
 
-      Dir.mkdir(@directory) unless Dir.exists?(@directory)
       File.open(@file_location, 'w') do |file|
         file.puts yaml
       end
-    end
-
-    after(:each) do
-      File.delete(@file_location)
     end
 
     it "should parse a yaml file and hand it to new" do
@@ -91,14 +85,8 @@ describe "GurpsComCal::Character::Yaml" do
 
     describe "save_yaml" do
       before(:each) do
-        @directory = "tmp/specs"
-        @file_location = "#{@directory}/test.yaml"
+        @file_location = "#{SPEC_WORKING_DIR}/test.yaml"
 
-        Dir.mkdir(@directory) unless Dir.exists?(@directory)
-        File.delete(@file_location) if File.exists?(@file_location)
-      end
-
-      after(:each) do
         File.delete(@file_location) if File.exists?(@file_location)
       end
 
