@@ -2,7 +2,7 @@ require_relative '../spec_helper'
 
 describe "GurpsComCal::Maneuver::Attack" do
   before(:each) do
-    @attacker = GurpsComCal::Character.load_yaml File.join(SPEC_RESOURCES_DIR, 'rick_castle.yaml')
+    @rick = GurpsComCal::Character.load_yaml File.join(SPEC_RESOURCES_DIR, 'rick_castle.yaml')
     @thug = GurpsComCal::Character.load_yaml File.join(SPEC_RESOURCES_DIR, 'thug.yaml')
 
     @defense = double(:fail? => true, :continue? => false, :success? => false, :message => 'message from defense', :options => 'options from defense')
@@ -10,7 +10,7 @@ describe "GurpsComCal::Maneuver::Attack" do
     GurpsComCal::Maneuver::Defense.stub(:new) { @defense }
   end
 
-  subject { GurpsComCal::Maneuver::Attack.new @attacker }
+  subject { GurpsComCal::Maneuver::Attack.new @rick }
 
   it "should start off with asking for a target" do
     subject.next
