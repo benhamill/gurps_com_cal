@@ -37,7 +37,7 @@ module GurpsComCal
 
     def parry
       @attacks.collect do |name, attack|
-        attack.parry
+        attack.parry if attack.respond_to? :parry
       end.max
     end
 
