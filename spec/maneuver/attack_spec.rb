@@ -2,8 +2,8 @@ require_relative '../spec_helper'
 
 describe "GurpsComCal::Maneuver::Attack" do
   before(:each) do
-    @rick = GurpsComCal::Character.load_yaml File.join(SPEC_RESOURCES_DIR, 'rick_castle.yaml')
-    @thug = GurpsComCal::Character.load_yaml File.join(SPEC_RESOURCES_DIR, 'thug.yaml')
+    @rick = GurpsComCal::Combatant.new(GurpsComCal::Character.load_yaml(File.join(SPEC_RESOURCES_DIR, 'rick_castle.yaml')))
+    @thug = GurpsComCal::Combatant.new(GurpsComCal::Character.load_yaml(File.join(SPEC_RESOURCES_DIR, 'thug.yaml')))
 
     @defense = double(:fail? => true, :continue? => false, :success? => false, :message => 'message from defense', :options => 'options from defense')
     @defense.stub(:next) { @defense }
