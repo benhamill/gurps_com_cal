@@ -4,7 +4,9 @@ module GurpsComCal
       attr_reader :equipped_weapon
 
       def equip_weapon weapon
-        if @character.weapon(weapon.name) == weapon
+        if weapon.is_a? String
+          @equipped_weapon = @character.weapon(weapon)
+        else
           @equipped_weapon = @character.weapon(weapon.name)
         end
 

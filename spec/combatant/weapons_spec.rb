@@ -19,13 +19,16 @@ describe "GurpsComCal::Combatant::Weapons" do
     end
 
     context "with a weapon the character owns" do
-      before(:each) do
-        @arg_weapon = double(GurpsComCal::Weapon, :name => 'Fist')
-        @weapon.stub(:==).with(@arg_weapon) { true }
+      it "should accept a weapon as an argument" do
+        arg_weapon = double(GurpsComCal::Weapon, :name => 'Fist')
+        @weapon.stub(:==).with(arg_weapon) { true }
+
+        subject.equip_weapon(arg_weapon)
+        subject.equipped_weapon.should == @weapon
       end
 
-      it "should accept a weapon as argument" do
-        subject.equip_weapon(@arg_weapon)
+      it "should accept a string as an argument" do
+        subject.equip_weapon('Fist')
         subject.equipped_weapon.should == @weapon
       end
     end
