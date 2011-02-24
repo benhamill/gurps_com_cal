@@ -15,7 +15,7 @@ module GurpsComCal
       end
 
       def parry?
-        equipped_weapon.respond_to(:parry)
+        equipped_weapon.respond_to?(:parry)
       end
     end
   end

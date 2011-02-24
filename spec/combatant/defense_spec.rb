@@ -7,7 +7,6 @@ end
 describe "GurpsComCal::Combatant::Defense" do
   before(:each) do
     @weapon = double(GurpsComCal::Weapon)
-    @weapon.stub(:respond_to).with(:parry) { false }
     subject.stub(:equipped_weapon) { @weapon }
   end
 
@@ -16,7 +15,7 @@ describe "GurpsComCal::Combatant::Defense" do
   describe "#defenses" do
     context "with an equipped melee weapon that can parry" do
       before(:each) do
-        @weapon.stub(:respond_to).with(:parry) { true }
+        @weapon.stub(:parry) { 10 }
       end
 
       it "should list parry" do
