@@ -118,5 +118,33 @@ describe "GurpsComCal::Weapon" do
         subject.to_hash['character'].should == nil
       end
     end
+
+    describe "#parry" do
+      context "with just one attack option" do
+        before(:each) do
+          @attacks = [double(:parry => 10, :to_ary => nil, :name => 'Punch')]
+          subject.attacks = @attacks
+        end
+
+        it "should just route the result of the attack's parry" do
+          subject.parry.should == 10
+        end
+      end
+
+      context "with more than one attack option" do
+        before(:each) do
+          @attacks = [
+            double(:parry => 10, :to_ary => nil, :name => 'Punch'),
+            double(:parry => 12, :to_ary => nil, :name => 'Chop')
+          ]
+
+          subject.attacks = @attacks
+        end
+
+        it "should return the highest parry result" do
+          subject.parry.should == 12
+        end
+      end
+    end
   end
 end

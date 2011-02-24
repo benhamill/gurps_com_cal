@@ -35,6 +35,12 @@ module GurpsComCal
       @attacks[attack_name]
     end
 
+    def parry
+      @attacks.collect do |name, attack|
+        attack.parry
+      end.max
+    end
+
     def to_hash
       result = {}
       result['attacks'] = @attacks.inject([]) do |array, hash_member|
