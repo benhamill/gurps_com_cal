@@ -14,4 +14,16 @@ describe "GurpsComCal::Maneuver::Defense" do
     subject.options.sort.should == %w{dodge parry}.sort
     subject.continue?.should be_true
   end
+
+  context "after selecting dodge" do
+    before(:each) do
+      subject.next.next('dodge')
+    end
+
+    it "should ask for the result of a dodge roll" do
+      subject.message.should == 'Rick Castle, roll against 8 and enter the result.'
+      subject.options.should == nil
+      subject.continue?.should be_true
+    end
+  end
 end
