@@ -66,4 +66,12 @@ describe "GurpsComCal::Maneuver::Defense" do
       end
     end
   end
+
+  context "after selecting parry" do
+    before(:each) do
+      subject.next.next('parry')
+    end
+
+    pending
+  end
 end
