@@ -79,6 +79,7 @@ describe "GurpsComCal::Maneuver::Attack" do
     end
 
     it "should append the defense's message to its own" do
+      @defense.stub(:continue?) { true }
       subject.next.next(@thug).next('Fist').next('Punch').next(9)
       subject.message.should == 'Success! message from defense'
       subject.options.should == 'options from defense'
@@ -117,9 +118,9 @@ describe "GurpsComCal::Maneuver::Attack" do
       subject.next
     end
 
-    it "should have the message and options form the defense" do
+    it "should have the message from the defense" do
       subject.message.should == 'message from defense Attack failed.'
-      subject.options.should == 'options from defense'
+      subject.options.should == nil
     end
 
     it "should end the action with a failure" do
@@ -130,6 +131,22 @@ describe "GurpsComCal::Maneuver::Attack" do
   end
 
   context "when the defense fails" do
-    pending
+    before(:each) do
+      @defense.stub(:continue?).and_return(true, false)
+      @defense.stub(:fail?) { true }
+      @defense.stub(:success?) { false }
+      subject.next.next(@thug).next('Fist').next('Punch').next(9).next
+    end
+
+    it "should stop delegating" do
+      @defense.should_not_receive(:next)
+      subject.next(2)
+    end
+
+    it "should have the message from the defense as well as its own" do
+      subject.message.should == 'message from defense Rick Castle, roll 1d-3 and enter the result.'
+      subject.options.should == nil
+      subject.continue?.should be_true
+    end
   end
 end

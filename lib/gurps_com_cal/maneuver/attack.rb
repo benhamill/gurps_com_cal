@@ -42,9 +42,9 @@ module GurpsComCal
       def delegate_to_defense *args
         @defense.next(*args)
         @message = @message ? "#{@message} #{@defense.message}" : @defense.message
-        @options = @defense.options
 
         if @defense.continue?
+          @options = @defense.options
           @next_method = :delegate_to_defense
         else
           finish_defense
@@ -57,14 +57,7 @@ module GurpsComCal
           @state = -1
         else
           @next_method = :do_damage
-        end
-      end
-
-      def do_defense result
-        if result <= @defense_target
-          false
-        else
-          [:do_damage, "Hit! #{@actor.name}, roll #{@attack.damage.roll} for damage and enter the result.", nil]
+          @message = "#{@message} #{@actor.name}, roll #{@attack.damage.roll} and enter the result."
         end
       end
 
