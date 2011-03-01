@@ -60,7 +60,7 @@ describe "GurpsComCal::Maneuver::Attack" do
     end
 
     it "should tell about a miss" do
-      subject.message.should == 'A miss! Maneuver ended.'
+      subject.message.should == 'A miss! Attack failed.'
       subject.options.should == nil
     end
 
@@ -118,7 +118,7 @@ describe "GurpsComCal::Maneuver::Attack" do
     end
 
     it "should have the message and options form the defense" do
-      subject.message.should == 'message from defense Maneuver ended.'
+      subject.message.should == 'message from defense Attack failed.'
       subject.options.should == 'options from defense'
     end
 

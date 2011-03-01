@@ -34,7 +34,7 @@ module GurpsComCal
           @message = 'Success!'
           delegate_to_defense
         else
-          @message = 'A miss! Maneuver ended.'
+          @message = 'A miss! Attack failed.'
           @state = -1
         end
       end
@@ -53,7 +53,7 @@ module GurpsComCal
 
       def finish_defense
         if @defense.success?
-          @message = "#{@message} Maneuver ended."
+          @message = "#{@message} Attack failed."
           @state = -1
         else
           @next_method = :do_damage
