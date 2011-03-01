@@ -149,4 +149,33 @@ describe "GurpsComCal::Maneuver::Attack" do
       subject.continue?.should be_true
     end
   end
+
+  context "after entering the damage result" do
+    before(:each) do
+      @defense.stub(:continue?).and_return(true, false)
+      @defense.stub(:fail?) { true }
+      @defense.stub(:success?) { false }
+      subject.next.next(@thug).next('Fist').next('Punch').next(9).next
+    end
+
+    it "should apply the damage to the target" do
+      @thug.should_receive(:damage).with('cr', 3)
+      subject.next(3)
+    end
+
+    it "should tell about the amount of damage done" do
+      @thug.stub(:damage) { 3 }
+      subject.next(3)
+
+      subject.message.should == 'Thug took 3 points of injury. Attack succeeded.'
+      subject.options.should == nil
+    end
+
+    it "should end the maneuver with success" do
+      subject.next(3)
+      subject.continue?.should be_false
+      subject.fail?.should be_false
+      subject.success?.should be_true
+    end
+  end
 end

@@ -63,7 +63,8 @@ module GurpsComCal
 
       def do_damage result
         injury = @target.damage(@attack.damage.type, result)
-        [nil, "#{@target.name} took #{injury} points of injury.", nil]
+        @message = "#{@target.name} took #{injury} points of injury. Attack succeeded."
+        @state = 1
       end
     end
   end
