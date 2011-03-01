@@ -20,10 +20,10 @@ module GurpsComCal
 
       def do_dodge result
         if result <= @actor.dodge
-          @message = 'A success!'
+          @message = 'A dodge! Defense succeeded.'
           @state = 1
         else
-          @message = 'A failure!'
+          @message = 'No dodge! Defense failed.'
           @state = -1
         end
       end

@@ -32,7 +32,7 @@ describe "GurpsComCal::Maneuver::Defense" do
       end
 
       it "should tell about success" do
-        subject.message.should == 'A success!'
+        subject.message.should == 'A dodge! Defense succeeded.'
         subject.options.should == nil
       end
 
@@ -52,7 +52,7 @@ describe "GurpsComCal::Maneuver::Defense" do
       end
 
       it "should tell about a failure" do
-        subject.message.should == 'A failure!'
+        subject.message.should == 'No dodge! Defense failed.'
         subject.options.should == nil
       end
 
