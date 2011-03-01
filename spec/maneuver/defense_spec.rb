@@ -25,5 +25,31 @@ describe "GurpsComCal::Maneuver::Defense" do
       subject.options.should == nil
       subject.continue?.should be_true
     end
+
+    context "and succeeding" do
+      before(:each) do
+        subject.next(5)
+      end
+
+      it "should tell about success" do
+        subject.message.should == 'A success!'
+        subject.options.should == nil
+      end
+
+      it "should not indicate continuation" do
+        subject.continue?.should be_false
+      end
+
+      it "should indicate success" do
+        subject.fail?.should be_false
+        subject.success?.should be_true
+      end
+    end
+
+    context "and failing" do
+      before(:each) do
+        subject.next(10)
+      end
+    end
   end
 end
