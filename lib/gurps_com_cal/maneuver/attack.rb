@@ -9,10 +9,18 @@ module GurpsComCal
       private
 
       def select_target target
-        @next_method = :select_weapon
         @target = target
-        @message = "#{@actor.name}, select a weapon."
-        @options = @actor.weapons
+
+        if @actor.equipped_weapon
+          @weapon = @actor.equipped_weapon
+          @next_method = :select_attack
+          @options = @weapon.attacks
+          @message = "#{@actor.name}, select an attack for your #{@weapon.name}."
+        else
+          @next_method = :select_weapon
+          @message = "#{@actor.name}, select a weapon."
+          @options = @actor.weapons
+        end
       end
 
       def select_weapon name

@@ -20,14 +20,29 @@ describe "GurpsComCal::Maneuver::Attack" do
   end
 
   context "after selecting a target" do
-    before(:each) do
-      subject.next.next(@thug)
+    context "without an equipped weapon" do
+      before(:each) do
+        subject.next.next(@thug)
+      end
+
+      it "should ask for a weapon to use" do
+        subject.message.should == "Rick Castle, select a weapon."
+        subject.options.sort.should == ['Fist', 'Large Knife'].sort
+        subject.continue?.should be_true
+      end
     end
 
-    it "should ask for a weapon to use" do
-      subject.message.should == "Rick Castle, select a weapon."
-      subject.options.sort.should == ['Fist', 'Large Knife'].sort
-      subject.continue?.should be_true
+    context "with an equipped weapon" do
+      before(:each) do
+        @rick.equip_weapon('Fist')
+        subject.next.next(@thug)
+      end
+
+      it "should go straight to asking for an attack" do
+        subject.message.should == 'Rick Castle, select an attack for your Fist.'
+        subject.options.should == ['Punch']
+        subject.continue?.should be_true
+      end
     end
   end
 
