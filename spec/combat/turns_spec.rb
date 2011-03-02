@@ -53,4 +53,8 @@ describe "GurpsComCal::Combat::Turns" do
       end
     end
   end
+
+  describe "#next_turn" do
+    pending
+  end
 end
