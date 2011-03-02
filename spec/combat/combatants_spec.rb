@@ -8,7 +8,11 @@ describe "GurpsComCal::Combat::Combatants" do
   subject { CombatantsHolder.new }
 
   describe "#load_combatant" do
-    let(:rick) { double(GurpsComCal::Combatant, :name => 'Rick Castle') }
+    let(:rick) { GurpsComCal::Combatant.new(GurpsComCal::Character.new(:name => 'Rick Castle')) }
+
+    before(:each) do
+      GurpsComCal::Combatant.stub(:load_yaml) { rick }
+    end
 
     it "should create a new combatant from a file" do
       GurpsComCal::Combatant.should_receive(:load_yaml).with('path/to/file.yaml') { rick }
@@ -16,11 +20,25 @@ describe "GurpsComCal::Combat::Combatants" do
     end
 
     it "should add the combatant that it loads" do
-      GurpsComCal::Combatant.stub(:load_yaml) { rick }
-
       subject.load_combatant('path/to/file.yaml')
-
       subject.combatant('Rick Castle').should == rick
+    end
+
+    context "with :as option" do
+      it "should rename the combatant before adding it" do
+        rick.should_receive(:name=).with('Jameson Rook')
+        subject.load_combatant('path/to/file.yaml', :as => 'Jameson Rook')
+      end
+
+      it "should use the new name for retrieval" do
+        subject.load_combatant('path/to/file.yaml', :as => 'Jameson Rook')
+        subject.combatant('Jameson Rook').should == rick
+      end
+
+      it "should NOT use the old name for retrieval" do
+        subject.load_combatant('path/to/file.yaml', :as => 'Jameson Rook')
+        subject.combatant('Rick Castle').should == nil
+      end
     end
   end
 

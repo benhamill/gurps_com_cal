@@ -6,8 +6,10 @@ module GurpsComCal
         super
       end
 
-      def load_combatant file_name
-        add_combatant Combatant.load_yaml(file_name)
+      def load_combatant file_name, opts = {}
+        combatant = Combatant.load_yaml(file_name)
+        combatant.name = opts[:as] if opts[:as]
+        add_combatant combatant
       end
 
       def add_combatant combatant
