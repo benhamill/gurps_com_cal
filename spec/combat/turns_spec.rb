@@ -7,5 +7,7 @@ end
 describe "GurpsComCal::Combat::Turns" do
   subject { TurnsHolder.new }
 
-  pending
+  describe "#turn_order" do
+    pending
+  end
 end
