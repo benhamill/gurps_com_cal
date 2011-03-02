@@ -63,4 +63,25 @@ describe "GurpsComCal::Combat::Combatants" do
       end
     end
   end
+
+  describe "#mook" do
+    it "should load a file n times" do
+      subject.should_receive(:load_combatant).exactly(3).times
+      subject.mook('path/to/file.yaml', 3)
+    end
+
+    it "should append a number to the given name" do
+      subject.should_receive(:load_combatant).with('path/to/file.yaml', :as => 'thug_1').ordered
+      subject.should_receive(:load_combatant).with('path/to/file.yaml', :as => 'thug_2').ordered
+      subject.should_receive(:load_combatant).with('path/to/file.yaml', :as => 'thug_3').ordered
+      subject.mook('path/to/file.yaml', 3, 'thug')
+    end
+
+    it "should default the name to 'mook'" do
+      subject.should_receive(:load_combatant).with('path/to/file.yaml', :as => 'mook_1').ordered
+      subject.should_receive(:load_combatant).with('path/to/file.yaml', :as => 'mook_2').ordered
+      subject.should_receive(:load_combatant).with('path/to/file.yaml', :as => 'mook_3').ordered
+      subject.mook('path/to/file.yaml', 3)
+    end
+  end
 end

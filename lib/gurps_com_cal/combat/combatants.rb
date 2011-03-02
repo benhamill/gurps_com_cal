@@ -23,6 +23,12 @@ module GurpsComCal
       def combatant name
         @combatants[name]
       end
+
+      def mook file_name, count, name='mook'
+        count.times do |n|
+          load_combatant file_name, :as => "#{name}_#{n+1}"
+        end
+      end
     end
   end
 end
