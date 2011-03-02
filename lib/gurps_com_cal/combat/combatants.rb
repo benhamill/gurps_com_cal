@@ -1,12 +1,16 @@
 module GurpsComCal
   class Combat
     module Combatants
+      def initialize
+        @combatants = {}
+        super
+      end
+
       def load_combatant file_name
-        combatant = Combatant.load_yaml(file_name)
+        add_combatant Combatant.load_yaml(file_name)
       end
 
       def add_combatant combatant
-        @combatants ||= {}
         @combatants[combatant.name] = combatant
       end
 
