@@ -2,8 +2,9 @@ module GurpsComCal
   class Combat
     module Turns
       def turn_order
-        @turn_order ||= combatants.sort do |one, other|
-          -1 * combatant(one).basic_move <=> combatant(other).basic_move
+        @turn_order ||= combatants.sort_by do |name|
+          combatant = combatant(name)
+          [-combatant.basic_move, -combatant.dx, rand]
         end
       end
     end

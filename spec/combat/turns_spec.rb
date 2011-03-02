@@ -33,5 +33,24 @@ describe "GurpsComCal::Combat::Turns" do
         subject.turn_order.should == ['The Flash', 'A Cheetah', 'Some Schmoe']
       end
     end
+
+    context "with combatants with tied basic speeds but different DX" do
+      before(:each) do
+        the_flash.dx = 5
+        a_cheetah.dx = 6
+        some_schmoe.dx = 7
+      end
+
+      it "should return in order of DX" do
+        subject.turn_order.should == ['Some Schmoe', 'A Cheetah', 'The Flash']
+      end
+    end
+
+    context "with combatants all tied" do
+      it "should determine randomly" do
+        subject.should_receive(:rand).exactly(3).times
+        subject.turn_order
+      end
+    end
   end
 end
