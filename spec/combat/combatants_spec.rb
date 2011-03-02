@@ -23,12 +23,6 @@ describe "GurpsComCal::Combat::Combatants" do
       subject.add_combatant(thug)
     end
 
-    describe "add_combatant" do
-      it "should take a Combatant object" do
-        subject.instance_variable_get(:@combatants).should == { 'Rick Castle' => rick, 'Thug' => thug }
-      end
-    end
-
     describe "combatants" do
       it "should list all the combatants" do
         subject.combatants.sort.should == ['Rick Castle', 'Thug'].sort
