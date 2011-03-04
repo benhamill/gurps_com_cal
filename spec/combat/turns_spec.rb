@@ -61,7 +61,8 @@ describe "GurpsComCal::Combat::Turns" do
 
   describe "#next_turn" do
     before(:each) do
-      subject.stub(:maneuver_list) { %w{Attack Wait} }
+      GurpsComCal::Maneuver.stub(:maneuvers) { %w{Attack Wait} }
+      GurpsComCal::Maneuver.stub(:maneuver).with('Attack') { GurpsComCal::Maneuver::Attack }
     end
 
     context "before combat has started" do

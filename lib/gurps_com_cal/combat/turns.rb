@@ -23,10 +23,6 @@ module GurpsComCal
 
         index = ask "Selection:"
       end
-
-      def maneuver_list
-        GurpsComCal::Maneuver::LIST
-      end
     end
   end
 end
