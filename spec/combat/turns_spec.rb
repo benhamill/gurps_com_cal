@@ -90,6 +90,11 @@ describe "GurpsComCal::Combat::Turns" do
         before(:each) do
           subject.stub(:ask).with("Selection:") { "1" }
         end
+
+        it "should create a new maneuver" do
+          GurpsComCal::Maneuver::Attack.should_receive(:new).with(the_flash)
+          subject.next_turn
+        end
       end
     end
   end
