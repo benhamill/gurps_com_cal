@@ -17,9 +17,9 @@ describe "GurpsComCal::Combat::Turns" do
   } }
 
   before(:each) do
-    the_flash.basic_move = 20
-    a_cheetah.basic_move = 10
-    some_schmoe.basic_move = 5
+    the_flash.basic_speed = 20
+    a_cheetah.basic_speed = 5.5
+    some_schmoe.basic_speed = 5
 
     subject.stub(:combatants) { combatants.keys }
     subject.stub(:combatant) { |name| combatants[name] }
@@ -27,14 +27,14 @@ describe "GurpsComCal::Combat::Turns" do
 
   describe "#turn_order" do
     context "with combatants with different basic speeds" do
-      it "should return in order of basic move" do
+      it "should return in order of basic speed" do
         subject.turn_order.should == ['The Flash', 'A Cheetah', 'Some Schmoe']
       end
     end
 
     context "with combatants with tied basic speeds but different DX" do
       before(:each) do
-        [the_flash, a_cheetah, some_schmoe].each { |c| c.basic_move = 5 }
+        [the_flash, a_cheetah, some_schmoe].each { |c| c.basic_speed = 5 }
         the_flash.dx = 5
         a_cheetah.dx = 6
         some_schmoe.dx = 7
@@ -47,7 +47,7 @@ describe "GurpsComCal::Combat::Turns" do
 
     context "with combatants all tied" do
       before(:each) do
-        [the_flash, a_cheetah, some_schmoe].each { |c| c.basic_move = 5 }
+        [the_flash, a_cheetah, some_schmoe].each { |c| c.basic_speed = 5 }
       end
 
       it "should determine randomly" do
