@@ -37,6 +37,8 @@ module GurpsComCal
             input = ask "Result:"
           end
         end
+
+        say "#{current_actor}'s turn is over."
       end
     end
   end

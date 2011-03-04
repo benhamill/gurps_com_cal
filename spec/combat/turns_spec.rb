@@ -116,5 +116,19 @@ describe "GurpsComCal::Combat::Turns" do
       attack.should_receive(:new).with(the_flash)
       subject.turn
     end
+
+    context "when the maneuver needs to continue" do
+      before(:each) do
+        attack_maneuver.stub(:continue?) { true }
+        attack_maneuver.stub(:message) { "hoo is u punchin?" }
+      end
+    end
+
+    context "when the maneuver is done" do
+      it "should tell about the end of the turn" do
+        subject.should_receive(:say).with("The Flash's turn is over.")
+        subject.turn
+      end
+    end
   end
 end
