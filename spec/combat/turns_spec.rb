@@ -23,6 +23,8 @@ describe "GurpsComCal::Combat::Turns" do
 
     subject.stub(:combatants) { combatants.keys }
     subject.stub(:combatant) { |name| combatants[name] }
+    subject.stub(:say)
+    subject.stub(:ask)
   end
 
   describe "#turn_order" do
@@ -58,10 +60,36 @@ describe "GurpsComCal::Combat::Turns" do
   end
 
   describe "#next_turn" do
+    before(:each) do
+      subject.stub(:maneuver_list) { %w{Attack Wait} }
+    end
+
     context "before combat has started" do
       it "should start combat with the first character in turn order" do
         subject.next_turn
         subject.current_actor.should == 'The Flash'
+      end
+
+      it "should ask to select an action" do
+        subject.should_receive(:say).with("It is The Flash's turn. Select a maneuver.")
+        subject.next_turn
+      end
+
+      it "should list all the actions for the user" do
+        subject.should_receive(:say).with("1. Attack")
+        subject.should_receive(:say).with("2. Wait")
+        subject.next_turn
+      end
+
+      it "should expect input" do
+        subject.should_receive(:ask).with("Selection:")
+        subject.next_turn
+      end
+
+      context "when an action is selected" do
+        before(:each) do
+          subject.stub(:ask).with("Selection:") { "1" }
+        end
       end
     end
   end
