@@ -18,22 +18,25 @@ module GurpsComCal
         @current_actor
       end
 
-      def next_turn
+      def turn
         @turn_number ||= 0
         @turn_number += 1
 
         say "It is #{current_actor}'s turn. Select a maneuver."
 
-        GurpsComCal::Maneuver.maneuvers.each_with_index do |maneuver, index|
-          say "#{index + 1}. #{maneuver}"
-        end
-
-        index = ask "Selection:"
-        index = index.to_i - 1
-
-        maneuver_name = GurpsComCal::Maneuver.maneuvers[index]
+        maneuver_name = menu GurpsComCal::Maneuver.maneuvers
         maneuver_class = GurpsComCal::Maneuver.maneuver(maneuver_name)
         maneuver = maneuver_class.new(combatant(current_actor))
+
+        while maneuver.continue? do
+          say maneuver.message
+
+          if maneuver.options
+            input = menu maneuver.options
+          else
+            input = ask "Result:"
+          end
+        end
       end
     end
   end

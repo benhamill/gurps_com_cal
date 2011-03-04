@@ -25,6 +25,7 @@ describe "GurpsComCal::Combat::Turns" do
     subject.stub(:combatant) { |name| combatants[name] }
     subject.stub(:say)
     subject.stub(:ask)
+    subject.stub(:menu)
   end
 
   describe "#turn_order" do
@@ -87,9 +88,10 @@ describe "GurpsComCal::Combat::Turns" do
     end
   end
 
-  describe "#next_turn" do
-    let(:attack) { double(GurpsComCal::Maneuver::Attack, :new => true) }
-    let(:wait) { double(:new => true) }
+  describe "#turn" do
+    let(:attack_maneuver) { double(GurpsComCal::Maneuver::Attack, :continue? => false) }
+    let(:attack) { double('ATTACK', :new => attack_maneuver) }
+    let(:wait) { double('WAIT') }
 
     before(:each) do
       GurpsComCal::Maneuver.stub(:maneuvers) { %w{Attack Wait} }
@@ -97,40 +99,22 @@ describe "GurpsComCal::Combat::Turns" do
       GurpsComCal::Maneuver.stub(:maneuver).with('Wait') { wait }
 
       subject.stub(:current_actor) { 'The Flash' }
+      subject.stub(:menu).with(%w{Attack Wait}) { "Attack" }
     end
 
-    context "before combat has started" do
-      it "should start combat with the first character in turn order" do
-        subject.next_turn
-        subject.current_actor.should == 'The Flash'
-      end
+    it "should ask to select an action" do
+      subject.should_receive(:say).with("It is The Flash's turn. Select a maneuver.")
+      subject.turn
+    end
 
-      it "should ask to select an action" do
-        subject.should_receive(:say).with("It is The Flash's turn. Select a maneuver.")
-        subject.next_turn
-      end
+    it "should list all the actions for the user" do
+      subject.should_receive(:menu).with(%w{Attack Wait})
+      subject.turn
+    end
 
-      it "should list all the actions for the user" do
-        subject.should_receive(:say).with("1. Attack")
-        subject.should_receive(:say).with("2. Wait")
-        subject.next_turn
-      end
-
-      it "should expect input" do
-        subject.should_receive(:ask).with("Selection:")
-        subject.next_turn
-      end
-
-      context "when an action is selected" do
-        before(:each) do
-          subject.stub(:ask).with("Selection:") { "1" }
-        end
-
-        it "should create a new maneuver" do
-          attack.should_receive(:new).with(the_flash)
-          subject.next_turn
-        end
-      end
+    it "should create a new maneuver" do
+      attack.should_receive(:new).with(the_flash)
+      subject.turn
     end
   end
 end
