@@ -11,6 +11,10 @@ module GurpsComCal
       def current_actor
         @current_actor
       end
+
+      def next_turn
+        @current_actor = turn_order.first
+      end
     end
   end
 end
