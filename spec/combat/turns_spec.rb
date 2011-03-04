@@ -89,7 +89,7 @@ describe "GurpsComCal::Combat::Turns" do
   end
 
   describe "#turn" do
-    let(:attack_maneuver) { double(GurpsComCal::Maneuver::Attack, :continue? => false, :message => 'done nao') }
+    let(:attack_maneuver) { double(GurpsComCal::Maneuver::Attack, :continue? => false, :start => true, :message => 'done nao') }
     let(:attack) { double('ATTACK', :new => attack_maneuver) }
     let(:wait) { double('WAIT') }
 
@@ -114,6 +114,11 @@ describe "GurpsComCal::Combat::Turns" do
 
     it "should create a new maneuver" do
       attack.should_receive(:new).with(the_flash)
+      subject.turn
+    end
+
+    it "should tell the maneuver to start" do
+      attack_maneuver.should_receive(:start)
       subject.turn
     end
 

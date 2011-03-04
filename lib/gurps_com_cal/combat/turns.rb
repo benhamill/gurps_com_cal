@@ -28,6 +28,8 @@ module GurpsComCal
         maneuver_class = GurpsComCal::Maneuver.maneuver(maneuver_name)
         maneuver = maneuver_class.new(combatant(current_actor))
 
+        maneuver.start
+
         while maneuver.continue? do
           say maneuver.message
 
