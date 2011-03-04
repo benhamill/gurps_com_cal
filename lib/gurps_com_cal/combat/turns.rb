@@ -9,11 +9,18 @@ module GurpsComCal
       end
 
       def current_actor
+        if @turn_number
+          @current_actor = turn_order[(@turn_number - 1) % turn_order.length]
+        else
+          @current_actor = turn_order.first
+        end
+
         @current_actor
       end
 
       def next_turn
-        @current_actor = turn_order.first
+        @turn_number ||= 0
+        @turn_number += 1
 
         say "It is #{current_actor}'s turn. Select a maneuver."
 

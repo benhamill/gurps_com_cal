@@ -59,6 +59,34 @@ describe "GurpsComCal::Combat::Turns" do
     end
   end
 
+  describe "#current_actor" do
+    context "before combat has started" do
+      it "should start with the first character in turn order" do
+        subject.current_actor.should == 'The Flash'
+      end
+    end
+
+    context "on the 3rd turn" do
+      before(:each) do
+        subject.instance_variable_set(:@turn_number, 3)
+      end
+
+      it "should be the third combatant" do
+        subject.current_actor.should == 'Some Schmoe'
+      end
+    end
+
+    context "on the 5th turn" do
+      before(:each) do
+        subject.instance_variable_set(:@turn_number, 5)
+      end
+
+      it "should be the second combatant" do
+        subject.current_actor.should == 'A Cheetah'
+      end
+    end
+  end
+
   describe "#next_turn" do
     let(:attack) { double(GurpsComCal::Maneuver::Attack, :new => true) }
     let(:wait) { double(:new => true) }
@@ -67,6 +95,8 @@ describe "GurpsComCal::Combat::Turns" do
       GurpsComCal::Maneuver.stub(:maneuvers) { %w{Attack Wait} }
       GurpsComCal::Maneuver.stub(:maneuver).with('Attack') { attack }
       GurpsComCal::Maneuver.stub(:maneuver).with('Wait') { wait }
+
+      subject.stub(:current_actor) { 'The Flash' }
     end
 
     context "before combat has started" do
