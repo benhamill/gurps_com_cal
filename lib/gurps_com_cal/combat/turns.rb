@@ -7,6 +7,10 @@ module GurpsComCal
           [-combatant.basic_move, -combatant.dx, rand]
         end
       end
+
+      def current_actor
+        @current_actor
+      end
     end
   end
 end

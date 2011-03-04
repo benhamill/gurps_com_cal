@@ -60,7 +60,8 @@ describe "GurpsComCal::Combat::Turns" do
   describe "#next_turn" do
     context "before combat has started" do
       it "should start combat with the first character in turn order" do
-        pending
+        subject.next_turn
+        subject.current_actor.should == 'The Flash'
       end
     end
   end
