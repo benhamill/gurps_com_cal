@@ -17,7 +17,7 @@ module GurpsComCal
 
         say "It is #{current_actor}'s turn. Select a maneuver."
 
-        maneuver_list.each_with_index do |maneuver, index|
+        GurpsComCal::Maneuver.maneuvers.each_with_index do |maneuver, index|
           say "#{index + 1}. #{maneuver}"
         end
 
