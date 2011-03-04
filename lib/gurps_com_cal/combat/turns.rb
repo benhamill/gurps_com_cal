@@ -36,8 +36,11 @@ module GurpsComCal
           else
             input = ask "Result:"
           end
+
+          maneuver.next(input)
         end
 
+        say maneuver.message
         say "#{current_actor}'s turn is over."
       end
     end

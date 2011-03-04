@@ -89,7 +89,7 @@ describe "GurpsComCal::Combat::Turns" do
   end
 
   describe "#turn" do
-    let(:attack_maneuver) { double(GurpsComCal::Maneuver::Attack, :continue? => false) }
+    let(:attack_maneuver) { double(GurpsComCal::Maneuver::Attack, :continue? => false, :message => 'done nao') }
     let(:attack) { double('ATTACK', :new => attack_maneuver) }
     let(:wait) { double('WAIT') }
 
@@ -119,14 +119,51 @@ describe "GurpsComCal::Combat::Turns" do
 
     context "when the maneuver needs to continue" do
       before(:each) do
-        attack_maneuver.stub(:continue?) { true }
+        attack_maneuver.stub(:continue?).and_return(true, false)
         attack_maneuver.stub(:message) { "hoo is u punchin?" }
+        attack_maneuver.stub(:options) { nil }
+        attack_maneuver.stub(:next)
+
+        subject.stub(:ask).with('Result:') { '12' }
+      end
+
+      it "should show the maneuver's message" do
+        subject.should_receive(:say).with('hoo is u punchin?')
+        subject.turn
+      end
+
+      context "without options" do
+        it "should ask for a result" do
+          subject.should_receive(:ask).with('Result:')
+          subject.turn
+        end
+      end
+
+      context "with options" do
+        before(:each) do
+          attack_maneuver.stub(:options) { ['this guy', 'that guy'] }
+        end
+
+        it "should list the choices to the user" do
+          subject.should_receive(:menu).with(['this guy', 'that guy'])
+          subject.turn
+        end
+      end
+
+      it "should pass the input along to the maneuver" do
+        attack_maneuver.should_receive(:next).with('12')
+        subject.turn
       end
     end
 
     context "when the maneuver is done" do
       it "should tell about the end of the turn" do
         subject.should_receive(:say).with("The Flash's turn is over.")
+        subject.turn
+      end
+
+      it "should display the maneuver's final message" do
+        subject.should_receive(:say).with("done nao")
         subject.turn
       end
     end
