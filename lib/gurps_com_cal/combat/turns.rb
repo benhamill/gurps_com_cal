@@ -22,6 +22,11 @@ module GurpsComCal
         end
 
         index = ask "Selection:"
+        index = index.to_i - 1
+
+        maneuver_name = GurpsComCal::Maneuver.maneuvers[index]
+        maneuver_class = GurpsComCal::Maneuver.maneuver(maneuver_name)
+        maneuver = maneuver_class.new(combatant(current_actor))
       end
     end
   end

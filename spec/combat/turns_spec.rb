@@ -60,9 +60,13 @@ describe "GurpsComCal::Combat::Turns" do
   end
 
   describe "#next_turn" do
+    let(:attack) { double(GurpsComCal::Maneuver::Attack, :new => true) }
+    let(:wait) { double(:new => true) }
+
     before(:each) do
       GurpsComCal::Maneuver.stub(:maneuvers) { %w{Attack Wait} }
-      GurpsComCal::Maneuver.stub(:maneuver).with('Attack') { GurpsComCal::Maneuver::Attack }
+      GurpsComCal::Maneuver.stub(:maneuver).with('Attack') { attack }
+      GurpsComCal::Maneuver.stub(:maneuver).with('Wait') { wait }
     end
 
     context "before combat has started" do
@@ -93,7 +97,7 @@ describe "GurpsComCal::Combat::Turns" do
         end
 
         it "should create a new maneuver" do
-          GurpsComCal::Maneuver::Attack.should_receive(:new).with(the_flash)
+          attack.should_receive(:new).with(the_flash)
           subject.next_turn
         end
       end
